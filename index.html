@@ -24,12 +24,22 @@
     </style>
   </head>
   <body>
-    <main>DEVICEORIENTATIONABSOLUTE NOT SUPPORTED!</main>
+    <main>NOPE</main>
     <script type="text/javascript">
       var main = document.querySelector('main')
-      window.addEventListener('deviceorientationabsolute', function (e) {
-        main.innerHTML = e.absolute && e.alpha !== null ? 'YEP' : 'NOPE'
+      var works = false
+
+      window.addEventListener('deviceorientation', function (e) {
+        if (!works) check(e)
       })
+      window.addEventListener('deviceorientationabsolute', function (e) {
+        if (!works) check(e)
+      })
+
+      function check (e) {
+        works = e.absolute && e.alpha !== null
+        main.innerHTML = 'YEP'
+      }
     </script>
   </body>
 </html>
